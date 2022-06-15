@@ -30,7 +30,6 @@ jobs:
 
       - name: Release to Heroku
         run: |
-          heroku container:login &&
           heroku container:release web --app ${{ secrets.HEROKU_APP_NAME }}
       # Release docker image to Heroku
       # - name: Build Push Release to Heroku
