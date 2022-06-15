@@ -12,7 +12,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("angular", policy => policy.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod());
-    options.AddPolicy("netlify", policy => policy.WithOrigins("https://pvo11.netlify.app").AllowAnyHeader().AllowAnyMethod());
+    options.AddPolicy("netlify prod", policy => policy.WithOrigins("https://pvo11.netlify.app").AllowAnyHeader().AllowAnyMethod());
+    options.AddPolicy("netlify pre-prod", policy => policy.WithOrigins("https://pvo11-preprod.netlify.app").AllowAnyHeader().AllowAnyMethod());
 });
 
 builder.Services.AddScoped<UserDbContext>();
@@ -27,7 +28,8 @@ if (app.Environment.IsDevelopment())
 }
 else
 {
-    app.UseCors("netlify");
+    app.UseCors("netlify prod");
+    app.UseCors("netlify pre-prod");
 }
 
 app.UseSwagger();
