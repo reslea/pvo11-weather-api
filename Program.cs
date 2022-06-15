@@ -24,13 +24,14 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseCors("angular");
-    app.UseSwagger();
-    app.UseSwaggerUI();
 }
 else
 {
     app.UseCors("netlify");
 }
+
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
