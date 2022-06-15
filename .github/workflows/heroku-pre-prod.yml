@@ -29,6 +29,8 @@ jobs:
           docker push registry.heroku.com/${{ secrets.HEROKU_APP_NAME }}/web
 
       - name: Release to Heroku
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: |
           heroku container:release web --app ${{ secrets.HEROKU_APP_NAME }}
       # Release docker image to Heroku
