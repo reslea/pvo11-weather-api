@@ -18,7 +18,7 @@ jobs:
 
       - name: Login to Heroku
         run: |
-          echo ${{ secrets.HEROKU_API_KEY }} | docker login --username=${{ secrets.HEROKU_EMAIL }} registry.heroku.com --password-stdin
+          docker login --username=${{ secrets.HEROKU_EMAIL }} --password=${{ secrets.HEROKU_API_KEY }} registry.heroku.com
         
       - name: Build docker image
         run: |
@@ -30,6 +30,7 @@ jobs:
 
       - name: Release to Heroku
         run: |
+          heroku container:login &&
           heroku container:release web --app ${{ secrets.HEROKU_APP_NAME }}
       # Release docker image to Heroku
       # - name: Build Push Release to Heroku
